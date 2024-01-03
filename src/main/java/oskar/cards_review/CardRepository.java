@@ -23,4 +23,9 @@ public class CardRepository {
     }
 
 
+    public int save(List<Card> cards) {
+        cards.forEach(card -> jdbcTemplate.update("INSERT INTO cards(name, overall, position, review) VALUES (?,?)",
+                card.getName(), card.getOverall(), card.getPosition(), card.getReview()));
+        return 1;
+    }
 }
