@@ -18,5 +18,9 @@ public class CardRepository {
         return jdbcTemplate.query("SELECT id, name, overall, position, review FROM cards", BeanPropertyRowMapper.newInstance(Card.class));
     }
 
+    public Card getById (int id) {
+        return jdbcTemplate.queryForObject("SELECT id, name, overall, position, review FROM cards WHERE " + "id = ?", BeanPropertyRowMapper.newInstance(Card.class));
+    }
+
 
 }
