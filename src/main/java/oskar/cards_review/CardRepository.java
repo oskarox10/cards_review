@@ -19,7 +19,7 @@ public class CardRepository {
     }
 
     public Card getById (int id) {
-        return jdbcTemplate.queryForObject("SELECT id, name, overall, position, review FROM cards WHERE " + "id = ?", BeanPropertyRowMapper.newInstance(Card.class));
+        return jdbcTemplate.queryForObject("SELECT id, name, overall, position, review FROM cards WHERE " + "id = ?", BeanPropertyRowMapper.newInstance(Card.class), id);
     }
 
     public int save(List<Card> cards) {
@@ -29,7 +29,7 @@ public class CardRepository {
     }
 
     public int update(Card card){
-        return jdbcTemplate.update("UPDATE cards SET name=?, overall=?, position=?, review=? WHERE id=?", card.getName(), card.getOverall(), card.getPosition(), card.getReview());
+        return jdbcTemplate.update("UPDATE cards SET name=?, overall=?, position=?, review=? WHERE id=?", card.getName(), card.getOverall(), card.getPosition(), card.getReview(), card.getId());
     }
 
 
