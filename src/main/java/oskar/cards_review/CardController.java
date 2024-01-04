@@ -64,5 +64,10 @@ public class CardController {
 
     }
 
+    @DeleteMapping("/cards/{id}")
+    public int delete(@PathVariable("id") int id){
+        return cardRepository.delete(id);
+    }
+
 
 }

@@ -32,5 +32,10 @@ public class CardRepository {
         return jdbcTemplate.update("UPDATE cards SET name=?, overall=?, position=?, review=? WHERE id=?", card.getName(), card.getOverall(), card.getPosition(), card.getReview(), card.getId());
     }
 
+    public int delete(int id){
+        return jdbcTemplate.update("DELETE FROM cards WHERE id=?", id);
+    }
+
+
 
 }
