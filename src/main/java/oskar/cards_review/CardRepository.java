@@ -22,10 +22,15 @@ public class CardRepository {
         return jdbcTemplate.queryForObject("SELECT id, name, overall, position, review FROM cards WHERE " + "id = ?", BeanPropertyRowMapper.newInstance(Card.class));
     }
 
-
     public int save(List<Card> cards) {
-        cards.forEach(card -> jdbcTemplate.update("INSERT INTO cards(name, overall, position, review) VALUES (?,?)",
+        cards.forEach(card -> jdbcTemplate.update("INSERT INTO cards(name, overall, position, review) VALUES (?,?,?,?)",
                 card.getName(), card.getOverall(), card.getPosition(), card.getReview()));
         return 1;
     }
+
+    public int update(Card card){
+        return jdbcTemplate.update("UPDATE cards SET name=?, overall=?, position=?, review=? WHERE id=?", card.getName(), card.getOverall(), card.getPosition(), card.getReview());
+    }
+
+
 }

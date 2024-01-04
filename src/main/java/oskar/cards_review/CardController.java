@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping
 public class CardController {
 
     @Autowired
@@ -26,5 +27,22 @@ public class CardController {
     @PostMapping("cards")
     public int add(@RequestBody List<Card> cards){
         return cardRepository.save(cards);
+    }
+
+    @PutMapping("/cards/{id}")
+    public int update(@PathVariable("id") int id, @RequestBody Card updatedCard){
+        Card card = cardRepository.getById(id);
+
+        if (card != null){
+            card.setName(updatedCard.getName());
+            card.setOverall(updatedCard.getOverall());
+            card.setPosition(updatedCard.getPosition());
+            card.setReview(updatedCard.getReview());
+
+            cardRepository.update(card);
+
+            return 1;
+        } else
+            return -1;
     }
 }
